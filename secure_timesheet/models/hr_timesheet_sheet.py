@@ -41,7 +41,7 @@ class HrTimesheetSheet(models.Model):
                     field = tuple(PROTECTED_FIELDS.intersection(vals))[0]
                     raise ValidationError(_(
                         "You may not modify the field %(field)s "
-                        "of the timesheet %(timesheet)s"
+                        "of the timesheet %(timesheet)s "
                         "because it is already confirmed.") % {
                         'field': field,
                         'timesheet': "%s - %s" % (

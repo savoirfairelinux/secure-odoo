@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* secure_timesheet
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-24 15:36+0000\n"
+"PO-Revision-Date: 2017-02-24 10:39-0500\n"
+"Last-Translator: David Dufresne <david.dufresne@savoirfairelinux.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#. module: secure_timesheet
+#: code:addons/secure_timesheet/models/hr_timesheet_sheet.py:23
+#, python-format
+msgid "You may not delete the timesheet %(timesheet)s because it is already confirmed."
+msgstr "Vous ne pouvez pas supprimer la feuille de temps %(timesheet)s car elle est confirmée."
+
+#. module: secure_timesheet
+#: code:addons/secure_timesheet/models/hr_analytic_timesheet.py:21
+#, python-format
+msgid "You may not delete the timesheet line %(line)s because it is bound to a confirmed timesheet (%(timesheet)s)."
+msgstr "Vous ne pouvez pas supprimer l'entrée de temps %(line)s car elle est liée à une feuille de temps confirmée (%(timesheet)s)."
+
+#. module: secure_timesheet
+#: code:addons/secure_timesheet/models/hr_timesheet_sheet.py:42
+#, python-format
+msgid "You may not modify the field %(field)s of the timesheet %(timesheet)s because it is already confirmed."
+msgstr "Vous ne pouvez pas modifier le champ %(field)s de la feuille de temps %(timesheet)s car elle est confirmée."
+
+#. module: secure_timesheet
+#: code:addons/secure_timesheet/models/hr_analytic_timesheet.py:42
+#, python-format
+msgid "You may not modify the field %(field)s of the timesheet line %(line)s because it is bound to a confirmed timesheet (%(timesheet)s)."
+msgstr "Vous ne pouvez pas modifier le champ %(field)s de l'entrée de temps %(line)s car la feuille de temps (%(timesheet)s) est validée."

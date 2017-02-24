@@ -35,7 +35,7 @@ class AccountInvoiceTax(models.Model):
                 raise ValidationError(_(
                     "You may not delete the invoice tax %(tax)s "
                     "because the invoice (%(invoice)s) "
-                    "is not in draft state.") % {
+                    "is validated.") % {
                     'invoice': tax.invoice_id.name,
                     'tax': tax.name,
                 })
@@ -51,7 +51,7 @@ class AccountInvoiceTax(models.Model):
                         "You may not modify the field %(field)s "
                         "of the invoice tax %(tax)s "
                         "because the invoice (%(invoice)s) "
-                        "is not in draft state.") % {
+                        "is validated.") % {
                         'field': field,
                         'invoice': tax.invoice_id.name,
                         'tax': tax.name,

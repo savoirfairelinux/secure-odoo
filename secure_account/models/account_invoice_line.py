@@ -35,7 +35,7 @@ class AccountInvoiceLine(models.Model):
                 raise ValidationError(_(
                     "You may not delete the invoice line %(line)s "
                     "because the invoice (%(invoice)s) "
-                    "is not in draft state.") % {
+                    "is validated.") % {
                     'invoice': line.invoice_id.name,
                     'line': line.name,
                 })
@@ -51,7 +51,7 @@ class AccountInvoiceLine(models.Model):
                         "You may not modify the field %(field)s "
                         "of the invoice line %(line)s "
                         "because the invoice (%(invoice)s) "
-                        "is not in draft state.") % {
+                        "is validated.") % {
                         'field': field,
                         'invoice': line.invoice_id.name,
                         'line': line.name,
