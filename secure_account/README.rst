@@ -1,6 +1,6 @@
-===============
-Secure Analytic
-===============
+=================
+Secure Accounting
+=================
 
 This module prevents any user from deleting analytic lines bound to a posted general accounting entry.
 It prevents writing inside legal fields of a confirmed accounting entry.

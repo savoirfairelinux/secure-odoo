@@ -41,7 +41,7 @@ class AccountInvoice(models.Model):
                 raise ValidationError(_(
                     "The invoice %(invoice)s may not be "
                     "cancelled or set to draft because "
-                    "it is not in draft state."
+                    "it is validated."
                 ) % {'invoice': invoice.name})
 
     @api.multi
@@ -56,7 +56,7 @@ class AccountInvoice(models.Model):
                     raise ValidationError(_(
                         "You may not modify the field %(field)s "
                         "of the invoice %(invoice)s "
-                        "because it is not in draft state") % {
+                        "because it is validated") % {
                         'field': field,
                         'invoice': invoice.name,
                     })
