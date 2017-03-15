@@ -12,5 +12,5 @@
     'category': 'Accounting & Finance',
     'depends': ['account'],
     'application': False,
-    'installable': True,
+    'installable': False,
 }

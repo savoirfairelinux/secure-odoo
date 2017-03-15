@@ -12,5 +12,5 @@
     'category': 'Human Resources',
     'depends': ['hr_timesheet_sheet', 'secure_account'],
     'application': False,
-    'installable': True,
+    'installable': False,
 }
