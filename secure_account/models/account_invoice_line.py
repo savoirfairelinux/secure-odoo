@@ -5,33 +5,42 @@
 from openerp import api, models, _
 from openerp.exceptions import ValidationError
 
-PROTECTED_FIELDS = {
-    'account_analytic_id',
-    'account_id',
-    'company_id',
-    'discount',
-    'invoice_id',
-    'invoice_line_tax_id',
-    'name',
-    'origin',
-    'partner_id',
-    'price_subtotal',
-    'price_unit',
-    'product_id',
-    'quantity',
-    'sequence',
-    'uos_id',
-}
-
 
 class AccountInvoiceLine(models.Model):
 
     _inherit = 'account.invoice.line'
 
+    PROTECTED_FIELDS = {
+        'account_analytic_id',
+        'account_id',
+        'company_id',
+        'discount',
+        'invoice_id',
+        'invoice_line_tax_id',
+        'name',
+        'origin',
+        'partner_id',
+        'price_subtotal',
+        'price_unit',
+        'product_id',
+        'quantity',
+        'sequence',
+        'uos_id',
+    }
+
+    @classmethod
+    def get_protected_fields(cls):
+        return cls.PROTECTED_FIELDS
+
+    @classmethod
+    def get_protected_states(cls):
+        return cls.PROTECTED_STATES
+
     @api.multi
     def unlink(self):
         for line in self:
-            if line.invoice_id.state in ('open', 'paid'):
+            invoice = line.invoice_id
+            if invoice.state in invoice.get_protected_states():
                 raise ValidationError(_(
                     "You may not delete the invoice line %(line)s "
                     "because the invoice (%(invoice)s) "
@@ -43,10 +52,12 @@ class AccountInvoiceLine(models.Model):
 
     @api.multi
     def write(self, vals):
-        if PROTECTED_FIELDS.intersection(vals):
+        protected_fields = self.get_protected_fields()
+        if protected_fields.intersection(vals):
             for line in self:
-                if line.invoice_id.state in ('open', 'paid'):
-                    field = tuple(PROTECTED_FIELDS.intersection(vals))[0]
+                invoice = line.invoice_id
+                if invoice.state in invoice.get_protected_states():
+                    field = tuple(protected_fields.intersection(vals))[0]
                     raise ValidationError(_(
                         "You may not modify the field %(field)s "
                         "of the invoice line %(line)s "

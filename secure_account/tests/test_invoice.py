@@ -25,12 +25,10 @@ class TestInvoice(common.TestAccountBase):
 
         cls.invoice = cls.env['account.invoice'].create({
             'partner_id': cls.customer.id,
-            'journal_id': cls.journal.id,
-            'period_id': cls.period.id,
-            'account_id': cls.account_3.id,
             'type': 'out_invoice',
             'currency_id': cls.cad.id,
             'date_invoice': cls.date_invoice,
+            'account_id': cls.account_3.id,
             'company_id': cls.company.id,
         })
 
@@ -51,53 +49,53 @@ class TestInvoice(common.TestAccountBase):
         })
 
     def validate_invoice(self):
-        self.invoice.signal_workflow('invoice_open')
+        self.invoice.action_invoice_open()
 
     def test_01_delete_invoice_line_draft(self):
-        self.assertEqual(len(self.invoice.invoice_line), 1)
-        self.invoice.invoice_line.unlink()
-        self.assertEqual(len(self.invoice.invoice_line), 0)
+        self.assertEqual(len(self.invoice.invoice_line_ids), 1)
+        self.invoice.invoice_line_ids.unlink()
+        self.assertEqual(len(self.invoice.invoice_line_ids), 0)
 
     def test_02_delete_invoice_line_posted(self):
         self.validate_invoice()
-        self.assertEqual(len(self.invoice.invoice_line), 1)
+        self.assertEqual(len(self.invoice.invoice_line_ids), 1)
         with self.assertRaises(ValidationError):
-            self.invoice.invoice_line.unlink()
+            self.invoice.invoice_line_ids.unlink()
 
     def test_03_write_invoice_line_draft(self):
-        self.assertEqual(len(self.invoice.invoice_line), 1)
-        self.assertEqual(self.invoice.invoice_line.price_unit, 20)
-        self.invoice.invoice_line.price_unit = 30
-        self.assertEqual(self.invoice.invoice_line.price_unit, 30)
+        self.assertEqual(len(self.invoice.invoice_line_ids), 1)
+        self.assertEqual(self.invoice.invoice_line_ids.price_unit, 20)
+        self.invoice.invoice_line_ids.price_unit = 30
+        self.assertEqual(self.invoice.invoice_line_ids.price_unit, 30)
 
     def test_04_write_invoice_line_posted(self):
         self.validate_invoice()
-        self.assertEqual(len(self.invoice.invoice_line), 1)
+        self.assertEqual(len(self.invoice.invoice_line_ids), 1)
         with self.assertRaises(ValidationError):
-            self.invoice.invoice_line.price_unit = 30
+            self.invoice.invoice_line_ids.price_unit = 30
 
     def test_05_delete_tax_line_draft(self):
-        self.assertEqual(len(self.invoice.tax_line), 1)
-        self.invoice.tax_line.unlink()
-        self.assertEqual(len(self.invoice.tax_line), 0)
+        self.assertEqual(len(self.invoice.tax_line_ids), 1)
+        self.invoice.tax_line_ids.unlink()
+        self.assertEqual(len(self.invoice.tax_line_ids), 0)
 
     def test_06_delete_tax_line_posted(self):
         self.validate_invoice()
-        self.assertEqual(len(self.invoice.tax_line), 1)
+        self.assertEqual(len(self.invoice.tax_line_ids), 1)
         with self.assertRaises(ValidationError):
-            self.invoice.tax_line.unlink()
+            self.invoice.tax_line_ids.unlink()
 
     def test_07_write_tax_line_draft(self):
-        self.assertEqual(len(self.invoice.tax_line), 1)
-        self.assertEqual(self.invoice.tax_line.amount, 15)
-        self.invoice.tax_line.amount = 30
-        self.assertEqual(self.invoice.tax_line.amount, 30)
+        self.assertEqual(len(self.invoice.tax_line_ids), 1)
+        self.assertEqual(self.invoice.tax_line_ids.amount, 15)
+        self.invoice.tax_line_ids.amount = 30
+        self.assertEqual(self.invoice.tax_line_ids.amount, 30)
 
     def test_08_write_tax_line_posted(self):
         self.validate_invoice()
-        self.assertEqual(len(self.invoice.tax_line), 1)
+        self.assertEqual(len(self.invoice.tax_line_ids), 1)
         with self.assertRaises(ValidationError):
-            self.invoice.tax_line.amount = 30
+            self.invoice.tax_line_ids.amount = 30
 
     def test_09_write_invoice_draft(self):
         self.assertEqual(self.invoice.date_invoice, self.date_invoice)
