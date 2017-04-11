@@ -10,7 +10,10 @@
     'website': 'http://www.savoirfairelinux.com',
     'license': 'LGPL-3',
     'category': 'Accounting & Finance',
-    'depends': ['account'],
+    'depends': [
+        'account',
+        'account_accountant',
+    ],
     'application': False,
     'installable': True,
 }

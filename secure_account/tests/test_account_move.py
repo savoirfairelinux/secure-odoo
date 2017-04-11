@@ -9,25 +9,25 @@ from . import common
 class TestAccountMove(common.TestAccountBase):
 
     def test_01_delete_move_line_draft(self):
-        self.assertEqual(len(self.move.line_id), 2)
+        self.assertEqual(len(self.move.line_ids), 2)
         self.line_2.unlink()
-        self.assertEqual(len(self.move.line_id), 1)
+        self.assertEqual(len(self.move.line_ids), 1)
 
     def test_02_delete_move_line_posted(self):
         self.move.post()
-        self.assertEqual(len(self.move.line_id), 2)
+        self.assertEqual(len(self.move.line_ids), 2)
         with self.assertRaises(ValidationError):
             self.line_2.unlink()
 
     def test_03_write_move_line_draft(self):
-        self.assertEqual(len(self.move.line_id), 2)
+        self.assertEqual(len(self.move.line_ids), 2)
         self.assertEqual(self.line_2.partner_id, self.partner_1)
         self.line_2.partner_id = self.partner_2
         self.assertEqual(self.line_2.partner_id, self.partner_2)
 
     def test_04_write_move_line_posted(self):
         self.move.post()
-        self.assertEqual(len(self.move.line_id), 2)
+        self.assertEqual(len(self.move.line_ids), 2)
         self.assertEqual(self.line_2.partner_id, self.partner_1)
         with self.assertRaises(ValidationError):
             self.line_2.partner_id = self.partner_2

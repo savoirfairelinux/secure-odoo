@@ -32,7 +32,7 @@ class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
     @api.multi
-    def unlink(self, check=True):
+    def unlink(self):
         for line in self:
             if line.move_id.state == 'posted':
                 raise ValidationError(_(
@@ -42,10 +42,10 @@ class AccountMoveLine(models.Model):
                     'line': line.name,
                     'entry': line.move_id.name,
                 })
-        return super(AccountMoveLine, self).unlink(check=check)
+        return super(AccountMoveLine, self).unlink()
 
     @api.multi
-    def write(self, vals, check=True, update_check=True):
+    def write(self, vals):
         if PROTECTED_FIELDS.intersection(vals):
             for line in self:
                 if line.move_id.state == 'posted':
@@ -59,5 +59,4 @@ class AccountMoveLine(models.Model):
                         'line': line.name,
                         'entry': line.move_id.name,
                     })
-        return super(AccountMoveLine, self).write(
-            vals, check=check, update_check=update_check)
+        return super(AccountMoveLine, self).write(vals)
