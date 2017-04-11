@@ -30,6 +30,7 @@ class TestInvoice(common.TestAccountBase):
             'date_invoice': cls.date_invoice,
             'account_id': cls.account_3.id,
             'company_id': cls.company.id,
+            'journal_id': cls.journal.id,
         })
 
         cls.invoice_line = cls.env['account.invoice.line'].create({

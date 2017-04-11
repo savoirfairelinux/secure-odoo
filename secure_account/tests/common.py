@@ -106,15 +106,15 @@ class TestAccountBase(common.SavepointCase):
                 'account.data_account_type_revenue').id,
         })
 
-        cls.company.property_account_expense_categ_id = cls.account_2
-        cls.company.property_account_payable_id = cls.account_3
-        cls.company.property_account_receivable_id = cls.account_4
-        cls.company.property_account_income_categ_id = cls.account_5
+        cls.set_default_property(
+            'res.partner', 'property_account_receivable_id',
+            cls.account_3)
 
         cls.account_tax = cls.env['account.account'].create({
             'name': 'Tax Account',
             'code': '2000002',
-            'user_type_id': cls.env.ref('account.data_account_type_payable').id,
+            'user_type_id': cls.env.ref(
+                'account.data_account_type_payable').id,
             'company_id': cls.company.id,
             'reconcile': True,
         })
@@ -122,7 +122,7 @@ class TestAccountBase(common.SavepointCase):
         cls.journal = cls.env['account.journal'].create({
             'name': 'Journal 1',
             'code': 'TEST1',
-            'type': 'cash',
+            'type': 'sale',
             'company_id': cls.company.id,
         })
 
@@ -151,3 +151,16 @@ class TestAccountBase(common.SavepointCase):
 
         cls.line_1 = cls.move.line_ids.filtered(lambda r: r.debit == 100)
         cls.line_2 = cls.move.line_ids.filtered(lambda r: r.credit == 100)
+
+    @classmethod
+    def set_default_property(cls, model, name, obj):
+        field = cls.env['ir.model.fields'].search([
+            ('model', '=', model),
+            ('name', '=', name),
+        ], limit=1)
+        cls.env['ir.property'].create({
+            'name': name,
+            'company_id': cls.company.id,
+            'value_reference': '%s,%s' % (obj._name, obj.id),
+            'fields_id': field.id,
+        })
