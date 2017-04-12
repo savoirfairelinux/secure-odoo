@@ -10,8 +10,6 @@ class HrTimesheetSheet(models.Model):
 
     _inherit = 'hr_timesheet_sheet.sheet'
 
-    # TODO? ondelete=restrict on timesheet_ids field
-
     PROTECTED_FIELDS = {
         'date_from',
         'date_to',

@@ -2,7 +2,7 @@
 # © 2017 Savoir-faire Linux
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/LGPL).
 
-from openerp import api, models, _
+from openerp import api, fields, models, _
 from openerp.exceptions import ValidationError
 
 
@@ -12,13 +12,13 @@ class AccountAnalyticLine(models.Model):
 
     # TODO: should we protect project.project? protect analytic lines
     # attached to projects in a certain state?
+    sheet_id = fields.Many2one(ondelete="restrict")
 
     @api.multi
     def check_unlink_access(self):
         for line in self:
             sheet = line.sheet_id
             # TODO: what do we do if there is no associated timesheet?
-            # Is that ever the case?
             if sheet.state in sheet.get_protected_states():
                 raise ValidationError(_(
                     "You may not delete the timesheet line "
@@ -42,7 +42,6 @@ class AccountAnalyticLine(models.Model):
             for line in self:
                 sheet = line.sheet_id
                 # TODO: what do we do if there is no associated timesheet?
-                # Is that ever the case?
                 if sheet.state in sheet.get_protected_states():
                     field = tuple(protected_fields.intersection(vals))[0]
                     raise ValidationError(_(
