@@ -5,21 +5,34 @@
 from openerp import api, models, _
 from openerp.exceptions import ValidationError
 
-PROTECTED_FIELDS = {
-    'date_from',
-    'date_to',
-    'employee_id',
-}
-
 
 class HrTimesheetSheet(models.Model):
 
     _inherit = 'hr_timesheet_sheet.sheet'
 
+    PROTECTED_FIELDS = {
+        'date_from',
+        'date_to',
+        'employee_id',
+    }
+
+    PROTECTED_STATES = {
+        'confirm',
+        'done',
+    }
+
+    @classmethod
+    def get_protected_fields(cls):
+        return set(cls.PROTECTED_FIELDS)
+
+    @classmethod
+    def get_protected_states(cls):
+        return set(cls.PROTECTED_STATES)
+
     @api.multi
     def check_unlink_access(self):
         for sheet in self:
-            if sheet.state in ('confirm', 'done'):
+            if sheet.state in self.get_protected_states():
                 raise ValidationError(_(
                     "You may not delete the timesheet "
                     "%(timesheet)s because it is already confirmed.") % {
@@ -35,19 +48,25 @@ class HrTimesheetSheet(models.Model):
 
     @api.multi
     def check_write_access(self, vals):
-        if PROTECTED_FIELDS.intersection(vals):
+        protected_fields = self.get_protected_fields()
+        protected_written = protected_fields.intersection(vals)
+        if protected_written:
             for sheet in self:
-                if sheet.state in ('confirm', 'done'):
-                    field = tuple(PROTECTED_FIELDS.intersection(vals))[0]
+                if sheet.state in self.get_protected_states():
                     raise ValidationError(_(
                         "You may not modify the field %(field)s "
                         "of the timesheet %(timesheet)s "
                         "because it is already confirmed.") % {
-                        'field': field,
+                        'field': protected_written.pop(),
                         'timesheet': "%s - %s" % (
                             sheet.employee_id.name, sheet.name
                         ),
                     })
+
+    # Bypass simple check from hr_timesheet_sheet module.
+    # Superseded by check_write_access
+    def _check_state(self):
+        return True
 
     @api.multi
     def write(self, vals):

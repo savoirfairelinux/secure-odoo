@@ -30,7 +30,6 @@ class TestTimesheets(common.TestAccountBase):
         cls.employee = cls.env['hr.employee'].create({
             'name': 'My Employee',
             'user_id': cls.user.id,
-            'journal_id': cls.analytic_journal.id,
         })
 
         now = datetime.now()
@@ -41,19 +40,23 @@ class TestTimesheets(common.TestAccountBase):
             'date_to': now + relativedelta(weeks=1, days=-1),
         })
 
-        cls.timesheet = cls.env['hr.analytic.timesheet'].create({
-            'name': '/',
-            'user_id': cls.user.id,
-            'date': now,
+        cls.project = cls.env['project.project'].create({
+            'name': 'My Project',
+            'partner_id': cls.partner_1.id,
+            'company_id': cls.company.id,
+        })
+
+        cls.timesheet = cls.env['account.analytic.line'].create({
+            'name': 'Test Timesheet Line',
+            'date': now + relativedelta(days=1),
             'amount': -100,
             'unit_amount': 5,
             'product_id': cls.product.id,
-            'journal_id': cls.analytic_journal.id,
             'account_id': cls.analytic_acc_1.id,
             'general_account_id': cls.account_1.id,
+            'user_id': cls.user.id,
+            'project_id': cls.project.id,
         })
-
-        cls.sheet.refresh()
 
     def test_01_delete_timesheet_line_draft(self):
         self.assertEqual(len(self.sheet.timesheet_ids), 1)
@@ -61,7 +64,7 @@ class TestTimesheets(common.TestAccountBase):
         self.assertEqual(len(self.sheet.timesheet_ids), 0)
 
     def test_02_delete_timesheet_line_confirmed(self):
-        self.sheet.button_confirm()
+        self.sheet.action_timesheet_confirm()
         self.assertEqual(len(self.sheet.timesheet_ids), 1)
         with self.assertRaises(ValidationError):
             self.timesheet.unlink()
@@ -73,28 +76,28 @@ class TestTimesheets(common.TestAccountBase):
         self.assertEqual(self.timesheet.amount, -200)
 
     def test_04_write_timesheet_line_confirmed(self):
-        self.sheet.button_confirm()
+        self.sheet.action_timesheet_confirm()
         self.assertEqual(len(self.sheet.timesheet_ids), 1)
         with self.assertRaises(ValidationError):
             self.timesheet.amount = -200
 
     def test_05_delete_analytic_line_confirmed(self):
-        self.sheet.button_confirm()
+        self.sheet.action_timesheet_confirm()
         self.assertEqual(len(self.sheet.timesheet_ids), 1)
         with self.assertRaises(ValidationError):
-            self.timesheet.line_id.unlink()
+            self.timesheet.unlink()
 
     def test_06_write_analytic_line_draft(self):
         self.assertEqual(len(self.sheet.timesheet_ids), 1)
         self.assertEqual(self.timesheet.amount, -100)
-        self.timesheet.line_id.amount = -200
+        self.timesheet.amount = -200
         self.assertEqual(self.timesheet.amount, -200)
 
     def test_07_write_analytic_line_confirmed(self):
-        self.sheet.button_confirm()
+        self.sheet.action_timesheet_confirm()
         self.assertEqual(len(self.sheet.timesheet_ids), 1)
         with self.assertRaises(ValidationError):
-            self.timesheet.line_id.amount = -200
+            self.timesheet.amount = -200
 
     def test_08_write_sheet_draft(self):
         now = datetime.now()
@@ -104,7 +107,7 @@ class TestTimesheets(common.TestAccountBase):
         self.assertEqual(self.sheet.date_from, new_date)
 
     def test_09_write_sheet_confirmed(self):
-        self.sheet.button_confirm()
+        self.sheet.action_timesheet_confirm()
         now = datetime.now()
         new_date = fields.Date.to_string(now + relativedelta(days=1))
         self.assertEqual(self.sheet.date_from, self.date_from)

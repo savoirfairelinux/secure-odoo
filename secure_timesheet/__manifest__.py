@@ -4,7 +4,7 @@
 
 {
     'name': 'Secure Timesheet',
-    'version': '8.0.1.0.1',
+    'version': '10.0.1.0.0',
     'author': 'Savoir-faire Linux',
     'maintainer': 'Savoir-faire Linux',
     'website': 'http://www.savoirfairelinux.com',
@@ -12,5 +12,5 @@
     'category': 'Human Resources',
     'depends': ['hr_timesheet_sheet', 'secure_account'],
     'application': False,
-    'installable': False,
+    'installable': True,
 }

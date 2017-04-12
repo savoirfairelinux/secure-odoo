@@ -9,3 +9,4 @@ It also prevents writing in legal fields of an invoice or deleting invoice lines
 Contributors
 ------------
 * David Dufresne <david.dufresne@savoirfairelinux.com>
+* Jérome Boisvert-Chouinard <jerome.boisvertchouinard@savoirfairelinux.com>

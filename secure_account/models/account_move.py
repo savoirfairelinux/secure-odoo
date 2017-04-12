@@ -5,27 +5,39 @@
 from openerp import api, models, _
 from openerp.exceptions import ValidationError
 
-PROTECTED_FIELDS = {
-    'company_id',
-    'currency_id',
-    'date',
-    'journal_id',
-    'line_id',
-    'partner_id',
-    'period_id',
-    'name',
-    'ref',
-}
-
 
 class AccountMove(models.Model):
 
     _inherit = 'account.move'
 
+    PROTECTED_FIELDS = {
+        'company_id',
+        'currency_id',
+        'date',
+        'journal_id',
+        'line_id',
+        'partner_id',
+        'period_id',
+        'name',
+        'ref',
+    }
+
+    PROTECTED_STATES = {
+        'posted',
+    }
+
+    @classmethod
+    def get_protected_fields(cls):
+        return set(cls.PROTECTED_FIELDS)
+
+    @classmethod
+    def get_protected_states(cls):
+        return set(cls.PROTECTED_STATES)
+
     @api.multi
     def unlink(self):
         for move in self:
-            if move.state == 'posted':
+            if move.state in self.get_protected_states():
                 raise ValidationError(_(
                     "You may not delete the accounting entry %(entry)s "
                     "because it posted.") % {
@@ -35,15 +47,16 @@ class AccountMove(models.Model):
 
     @api.multi
     def write(self, vals):
-        if PROTECTED_FIELDS.intersection(vals):
+        protected_fields = self.get_protected_fields()
+        protected_written = protected_fields.intersection(vals)
+        if protected_written:
             for move in self:
-                if move.state == 'posted':
-                    field = tuple(PROTECTED_FIELDS.intersection(vals))[0]
+                if move.state in self.get_protected_states():
                     raise ValidationError(_(
                         "You may not modify the field %(field)s "
                         "of the accounting entry %(entry)s "
                         "because it is posted.") % {
-                        'field': field,
+                        'field': protected_written.pop(),
                         'entry': move.name,
                     })
         return super(AccountMove, self).write(vals)
