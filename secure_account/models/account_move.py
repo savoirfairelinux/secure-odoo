@@ -28,11 +28,11 @@ class AccountMove(models.Model):
 
     @classmethod
     def get_protected_fields(cls):
-        return cls.PROTECTED_FIELDS
+        return set(cls.PROTECTED_FIELDS)
 
     @classmethod
     def get_protected_states(cls):
-        return cls.PROTECTED_STATES
+        return set(cls.PROTECTED_STATES)
 
     @api.multi
     def unlink(self):
@@ -48,15 +48,15 @@ class AccountMove(models.Model):
     @api.multi
     def write(self, vals):
         protected_fields = self.get_protected_fields()
-        if protected_fields.intersection(vals):
+        protected_written = protected_fields.intersection(vals)
+        if protected_written:
             for move in self:
                 if move.state in self.get_protected_states():
-                    field = tuple(protected_fields.intersection(vals))[0]
                     raise ValidationError(_(
                         "You may not modify the field %(field)s "
                         "of the accounting entry %(entry)s "
                         "because it is posted.") % {
-                        'field': field,
+                        'field': protected_written.pop(),
                         'entry': move.name,
                     })
         return super(AccountMove, self).write(vals)

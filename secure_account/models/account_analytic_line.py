@@ -31,11 +31,11 @@ class AccountAnalyticLine(models.Model):
 
     @classmethod
     def get_protected_fields(cls):
-        return cls.PROTECTED_FIELDS
+        return set(cls.PROTECTED_FIELDS)
 
     @classmethod
     def get_protected_states(cls):
-        return cls.PROTECTED_STATES
+        return set(cls.PROTECTED_STATES)
 
     @api.multi
     def unlink(self):
@@ -53,16 +53,16 @@ class AccountAnalyticLine(models.Model):
     @api.multi
     def write(self, vals):
         protected_fields = self.get_protected_fields()
-        if protected_fields.intersection(vals):
+        protected_written = protected_fields.intersection(vals)
+        if protected_written:
             for line in self:
-                if line.move_id.move_id.state == 'posted':
-                    field = tuple(protected_fields.intersection(vals))[0]
+                if line.move_id.move_id.state in self.get_protected_states():
                     raise ValidationError(_(
                         "You may not modify the field %(field)s "
                         "of the analytic line "
                         "%(line)s because it is bound to a posted "
                         "accounting entry (%(entry)s).") % {
-                        'field': field,
+                        'field': protected_written.pop(),
                         'line': line.name,
                         'entry': line.move_id.move_id.name,
                     })

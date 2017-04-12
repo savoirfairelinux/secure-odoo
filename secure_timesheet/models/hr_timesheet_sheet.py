@@ -23,11 +23,11 @@ class HrTimesheetSheet(models.Model):
 
     @classmethod
     def get_protected_fields(cls):
-        return cls.PROTECTED_FIELDS
+        return set(cls.PROTECTED_FIELDS)
 
     @classmethod
     def get_protected_states(cls):
-        return cls.PROTECTED_STATES
+        return set(cls.PROTECTED_STATES)
 
     @api.multi
     def check_unlink_access(self):
@@ -49,15 +49,15 @@ class HrTimesheetSheet(models.Model):
     @api.multi
     def check_write_access(self, vals):
         protected_fields = self.get_protected_fields()
-        if protected_fields.intersection(vals):
+        protected_written = protected_fields.intersection(vals)
+        if protected_written:
             for sheet in self:
-                if sheet.state in ('confirm', 'done'):
-                    field = tuple(protected_fields.intersection(vals))[0]
+                if sheet.state in self.get_protected_states():
                     raise ValidationError(_(
                         "You may not modify the field %(field)s "
                         "of the timesheet %(timesheet)s "
                         "because it is already confirmed.") % {
-                        'field': field,
+                        'field': protected_written.pop(),
                         'timesheet': "%s - %s" % (
                             sheet.employee_id.name, sheet.name
                         ),

@@ -30,11 +30,11 @@ class AccountInvoiceLine(models.Model):
 
     @classmethod
     def get_protected_fields(cls):
-        return cls.PROTECTED_FIELDS
+        return set(cls.PROTECTED_FIELDS)
 
     @classmethod
     def get_protected_states(cls):
-        return cls.PROTECTED_STATES
+        return set(cls.PROTECTED_STATES)
 
     @api.multi
     def unlink(self):
@@ -53,17 +53,17 @@ class AccountInvoiceLine(models.Model):
     @api.multi
     def write(self, vals):
         protected_fields = self.get_protected_fields()
-        if protected_fields.intersection(vals):
+        protected_written = protected_fields.intersection(vals)
+        if protected_written:
             for line in self:
                 invoice = line.invoice_id
                 if invoice.state in invoice.get_protected_states():
-                    field = tuple(protected_fields.intersection(vals))[0]
                     raise ValidationError(_(
                         "You may not modify the field %(field)s "
                         "of the invoice line %(line)s "
                         "because the invoice (%(invoice)s) "
                         "is validated.") % {
-                        'field': field,
+                        'field': protected_written.pop(),
                         'invoice': line.invoice_id.name,
                         'line': line.name,
                     })

@@ -35,11 +35,11 @@ class AccountInvoice(models.Model):
 
     @classmethod
     def get_protected_fields(cls):
-        return cls.PROTECTED_FIELDS
+        return set(cls.PROTECTED_FIELDS)
 
     @classmethod
     def get_protected_states(cls):
-        return cls.PROTECTED_STATES
+        return set(cls.PROTECTED_STATES)
 
     @api.multi
     def check_next_state(self, next_state):
@@ -63,15 +63,15 @@ class AccountInvoice(models.Model):
             self.check_next_state(vals['state'])
 
         protected_fields = self.get_protected_fields()
-        if protected_fields.intersection(vals):
+        protected_written = protected_fields.intersection(vals)
+        if protected_written:
             for invoice in self:
                 if invoice.state in self.get_protected_states():
-                    field = tuple(protected_fields.intersection(vals))[0]
                     raise ValidationError(_(
                         "You may not modify the field %(field)s "
                         "of the invoice %(invoice)s "
                         "because it is validated") % {
-                        'field': field,
+                        'field': protected_written.pop(),
                         'invoice': invoice.name,
                     })
         return super(AccountInvoice, self).write(vals)

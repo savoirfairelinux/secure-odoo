@@ -33,7 +33,7 @@ class AccountMoveLine(models.Model):
 
     @classmethod
     def get_protected_fields(cls):
-        return cls.PROTECTED_FIELDS
+        return set(cls.PROTECTED_FIELDS)
 
     @api.multi
     def unlink(self):
@@ -52,17 +52,17 @@ class AccountMoveLine(models.Model):
     @api.multi
     def write(self, vals):
         protected_fields = self.get_protected_fields()
-        if protected_fields.intersection(vals):
+        protected_written = protected_fields.intersection(vals)
+        if protected_written:
             for line in self:
                 move = line.move_id
                 if move.state in move.get_protected_states():
-                    field = tuple(protected_fields.intersection(vals))[0]
                     raise ValidationError(_(
                         "You may not modify the field %(field)s "
                         "of the accounting item "
                         "%(line)s because it is bound to a posted "
                         "accounting entry (%(entry)s).") % {
-                        'field': field,
+                        'field': protected_written.pop(),
                         'line': line.name,
                         'entry': line.move_id.name,
                     })
