@@ -32,11 +32,11 @@ def write(self, vals):
 
 
 @api.multi
-def unlink(self, vals):
+def unlink(self):
     if is_module_installed(self.env):
         return super(AccountAnalyticLine, self).unlink()
     else:
-        unlink_original(self, vals)
+        unlink_original(self)
 
 
 AccountAnalyticLine.create = create
