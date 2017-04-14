@@ -63,11 +63,6 @@ class HrTimesheetSheet(models.Model):
                         ),
                     })
 
-    # Bypass simple check from hr_timesheet_sheet module.
-    # Superseded by check_write_access
-    def _check_state(self):
-        return True
-
     @api.multi
     def write(self, vals):
         self.check_write_access(vals)

@@ -60,3 +60,8 @@ class AccountAnalyticLine(models.Model):
     def write(self, vals):
         self.check_write_access(vals)
         return super(AccountAnalyticLine, self).write(vals)
+
+    # Bypass simple check from hr_timesheet_sheet module.
+    # Superseded by check_write_access
+    def _check_state(self):
+        return True
