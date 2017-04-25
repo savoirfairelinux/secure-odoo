@@ -4,8 +4,8 @@
 # License GPL-3.0 or later (http://www.gnu.org/licenses/gpl).
 
 from collections import defaultdict
-from openerp import api, fields, models, SUPERUSER_ID, _
-from openerp.exceptions import AccessError
+from odoo import api, fields, models, SUPERUSER_ID, _
+from odoo.exceptions import AccessError
 
 
 class ResUsers(models.Model):

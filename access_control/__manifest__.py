@@ -5,10 +5,11 @@
 
 {
     "name": "Access Control",
-    "version": "8.0.1.0.0",
-    "author": "Smile",
-    "website": 'http://www.smile.fr',
-    "license": 'AGPL-3',
+    "version": "10.0.1.0.0",
+    "author": "Smile,Savoir-faire Linux",
+    "maintainer": "Savoir-faire Linux",
+    "website": 'https://www.savoirfairelinux.com',
+    "license": 'GPL-3',
     "category": "Tools",
     "depends": ['base'],
     "data": [
