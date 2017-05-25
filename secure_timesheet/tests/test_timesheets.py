@@ -56,6 +56,7 @@ class TestTimesheets(common.TestAccountBase):
             'general_account_id': cls.account_1.id,
             'user_id': cls.user.id,
             'project_id': cls.project.id,
+            'is_timesheet': True,
         })
 
     def test_01_delete_timesheet_line_draft(self):
