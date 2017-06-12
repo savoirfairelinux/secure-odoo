@@ -12,9 +12,9 @@ class ResGroups(models.Model):
 
     @api.multi
     def write(self, vals):
-        old_users = self.mapped('users')
+        old_users = self.with_context(active_test=False).mapped('users')
         res = super(ResGroups, self).write(vals)
-        new_users = self.mapped('users')
+        new_users = self.with_context(active_test=False).mapped('users')
         all_users = old_users | new_users
         all_users.filtered(
             lambda u: u.user_profile).update_users_linked_to_profile()
@@ -23,6 +23,6 @@ class ResGroups(models.Model):
     @api.model
     def create(self, vals):
         res = super(ResGroups, self).create(vals)
-        res.users.filtered(
+        res.with_context(active_test=False).users.filtered(
             lambda u: u.user_profile).update_users_linked_to_profile()
         return res
