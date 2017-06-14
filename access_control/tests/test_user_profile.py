@@ -17,18 +17,21 @@ class TestUserProfile(TransactionCase):
             'name': 'Profile 1',
             'login': 'profile1',
             'user_profile': True,
+            'active': False,
             'groups_id': [(6, 0, [self.group1.id])],
         })
         self.user_profile2 = self.env['res.users'].create({
             'name': 'Profile 2',
             'login': 'profile2',
             'user_profile': True,
+            'active': False,
             'groups_id': [(6, 0, (self.group1 | self.group2).ids)],
         })
         self.user_profile3 = self.env['res.users'].create({
             'name': 'Profile 3',
             'login': 'profile3',
             'user_profile': True,
+            'active': False,
             'groups_id': [(6, 0, [self.group3.id])],
         })
         self.user = self.env['res.users'].create({

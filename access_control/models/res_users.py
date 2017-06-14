@@ -19,8 +19,10 @@ class ResUsers(models.Model):
         'profile_id',
         'user_id',
         'User Profile',
-        domain=[('id', '!=', SUPERUSER_ID), ('user_profile', '=', True)],
-        context={'active_test': False})
+        domain=[
+            ('id', '!=', SUPERUSER_ID), ('user_profile', '=', True),
+            '|', ('active', '=', True), ('active', '=', False),
+        ])
 
     user_ids = fields.Many2many(
         'res.users',
@@ -36,6 +38,7 @@ class ResUsers(models.Model):
         users_by_profile = defaultdict(set)
 
         group_erp = self.env.ref('base.group_erp_manager')
+
         if group_erp in self.mapped('user_profile_ids.groups_id'):
             if group_erp not in self.env.user.groups_id:
                 raise AccessError(_(
