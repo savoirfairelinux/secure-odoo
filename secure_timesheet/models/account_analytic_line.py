@@ -11,6 +11,8 @@ class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
 
     sheet_id = fields.Many2one(ondelete="restrict")
+    project_id = fields.Many2one(ondelete="restrict")
+    task_id = fields.Many2one(ondelete="restrict")
 
     @api.multi
     def check_unlink_access(self):
