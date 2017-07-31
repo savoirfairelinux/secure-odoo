@@ -32,3 +32,14 @@ class TestAnalytic(common.TestAccountBase):
         self.assertEqual(len(self.line_1.analytic_line_ids), 1)
         with self.assertRaises(ValidationError):
             self.line_1.analytic_line_ids.amount = -200
+
+    def test_05_manage_analytic_line_posted_bypass(self):
+        self.env.user.write({
+            'groups_id': [
+                (4, self.env.ref(
+                    'secure_account.group_analytic_line_manager').id)],
+        })
+
+        self.move.post()
+        self.line_1.analytic_line_ids.amount = -200
+        self.line_1.analytic_line_ids.unlink()

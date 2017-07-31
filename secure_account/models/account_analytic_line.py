@@ -39,31 +39,36 @@ class AccountAnalyticLine(models.Model):
 
     @api.multi
     def unlink(self):
-        for line in self:
-            if line.move_id.move_id.state in self.get_protected_states():
-                raise ValidationError(_(
-                    "You may not delete the analytic line "
-                    "%(line)s because it is bound to a posted "
-                    "accounting entry (%(entry)s).") % {
-                    'line': line.name,
-                    'entry': line.move_id.move_id.name,
-                })
+        group_name = 'secure_account.group_analytic_line_manager'
+        if not self.env.user.has_group(group_name):
+            for line in self:
+                if line.move_id.move_id.state in self.get_protected_states():
+                    raise ValidationError(_(
+                        "You may not delete the analytic line "
+                        "%(line)s because it is bound to a posted "
+                        "accounting entry (%(entry)s).") % {
+                        'line': line.name,
+                        'entry': line.move_id.move_id.name,
+                    })
         return super(AccountAnalyticLine, self).unlink()
 
     @api.multi
     def write(self, vals):
-        protected_fields = self.get_protected_fields()
-        protected_written = protected_fields.intersection(vals)
-        if protected_written:
-            for line in self:
-                if line.move_id.move_id.state in self.get_protected_states():
-                    raise ValidationError(_(
-                        "You may not modify the field %(field)s "
-                        "of the analytic line "
-                        "%(line)s because it is bound to a posted "
-                        "accounting entry (%(entry)s).") % {
-                        'field': protected_written.pop(),
-                        'line': line.name,
-                        'entry': line.move_id.move_id.name,
-                    })
+        group_name = 'secure_account.group_analytic_line_manager'
+        if not self.env.user.has_group(group_name):
+            protected_fields = self.get_protected_fields()
+            protected_states = self.get_protected_states()
+            protected_written = protected_fields.intersection(vals)
+            if protected_written:
+                for line in self:
+                    if line.move_id.move_id.state in protected_states:
+                        raise ValidationError(_(
+                            "You may not modify the field %(field)s "
+                            "of the analytic line "
+                            "%(line)s because it is bound to a posted "
+                            "accounting entry (%(entry)s).") % {
+                            'field': protected_written.pop(),
+                            'line': line.name,
+                            'entry': line.move_id.move_id.name,
+                        })
         return super(AccountAnalyticLine, self).write(vals)

@@ -16,6 +16,10 @@ class AccountAnalyticLine(models.Model):
 
     @api.multi
     def check_unlink_access(self):
+        group_name = 'secure_account.group_analytic_line_manager'
+        if self.env.user.has_group(group_name):
+            return True
+
         for line in self:
             sheet = line.sheet_id
             if not sheet:
@@ -38,6 +42,10 @@ class AccountAnalyticLine(models.Model):
 
     @api.multi
     def check_write_access(self, vals):
+        group_name = 'secure_account.group_analytic_line_manager'
+        if self.env.user.has_group(group_name):
+            return True
+
         protected_fields = self.get_protected_fields()
         protected_written = protected_fields.intersection(vals)
         if protected_written:
