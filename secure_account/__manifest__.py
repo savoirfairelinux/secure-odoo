@@ -13,6 +13,10 @@
     'depends': [
         'account',
     ],
+    'data': [
+        'security/res_groups.xml',
+        'security/ir.model.access.csv',
+    ],
     'application': False,
     'installable': True,
 }

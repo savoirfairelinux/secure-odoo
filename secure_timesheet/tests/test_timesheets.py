@@ -114,3 +114,14 @@ class TestTimesheets(common.TestAccountBase):
         self.assertEqual(self.sheet.date_from, self.date_from)
         with self.assertRaises(ValidationError):
             self.sheet.date_from = new_date
+
+    def test_10_manage_analytic_line_posted_bypass(self):
+        self.env.user.write({
+            'groups_id': [
+                (4, self.env.ref(
+                    'secure_account.group_analytic_line_manager').id)],
+        })
+
+        self.sheet.action_timesheet_confirm()
+        self.timesheet.amount = -200
+        self.timesheet.unlink()
