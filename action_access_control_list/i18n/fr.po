@@ -1,0 +1,153 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* action_access_control_list
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-06 15:00-0400\n"
+"PO-Revision-Date: 2017-10-06 15:05-0400\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: istvan Szalai <istvan.szalai@savoirfairelinux.com>\n"
+"Language: fr\n"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_groups_id
+msgid "Access group"
+msgstr "Groupe d'accès"
+
+#. module: action_access_control_list
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_form
+msgid "Action"
+msgstr "Action"
+
+#. module: action_access_control_list
+#: model:ir.actions.act_window,name:action_access_control_list.ir_action_access_action
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_list
+msgid "Action Access"
+msgstr "Accès d'action"
+
+#. module: action_access_control_list
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_form
+msgid "Action access"
+msgstr "Accès d'action"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_action_id
+msgid "Action id"
+msgstr "ID d'action"
+
+#. module: action_access_control_list
+#: model:ir.ui.menu,name:action_access_control_list.menu_ir_action_access
+msgid "Actions access rules"
+msgstr "Règles d'accès aux actions"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_is_active
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_is_active
+msgid "Active"
+msgstr "Actif"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_create_uid
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_create_date
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_display_name
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_domain
+msgid "Domain"
+msgstr "Domain"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_id
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_id
+msgid "ID"
+msgstr "ID"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access___last_update
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_write_uid
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_write_date
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_model_technical_name
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_model_technical_name
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_form
+msgid "Model"
+msgstr "Modèle"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_model_id
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_model_id
+msgid "Model id"
+msgstr "ID du modèle"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,help:action_access_control_list.field_ir_action_access_action_technical_name
+#: model:ir.model.fields,help:action_access_control_list.field_ir_protected_action_technical_name
+msgid "Name of the python method corresponding to the action"
+msgstr "Nom de la méthode python correspondant à l'action"
+
+#. module: action_access_control_list
+#: model:ir.actions.act_window,name:action_access_control_list.ir_protected_action_action
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_protected_action_list
+msgid "Protected Action"
+msgstr "Action protégée"
+
+#. module: action_access_control_list
+#: model:ir.ui.menu,name:action_access_control_list.menu_ir_protected_action
+msgid "Protected actions"
+msgstr "Actions protégée"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_action_technical_name
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_technical_name
+msgid "Technical name"
+msgstr "Nom technique"
+
+#. module: action_access_control_list
+#: model:ir.model,name:action_access_control_list.model_ir_action_access
+msgid "ir.action.access"
+msgstr "ir.action.access"
+
+#. module: action_access_control_list
+#: model:ir.model,name:action_access_control_list.model_ir_protected_action
+msgid "ir.protected.action"
+msgstr "ir.protected.action"
