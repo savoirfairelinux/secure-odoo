@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
 
-        <menuitem action="ir_protected_action_action"
-            id="menu_ir_protected_action"
-            parent="base.menu_security"
-            name="Protected actions"
-            sequence="15"/>
+    <menuitem action="ir_protected_action_action"
+        id="menu_ir_protected_action"
+        parent="base.menu_security"
+        name="Protected Actions"
+        sequence="15"/>
 
-        <menuitem action="ir_action_access_action"
-            id="menu_ir_action_access"
-            parent="base.menu_security"
-            name="Actions access rules"
-            sequence="16"/>
+    <menuitem action="ir_action_access_action"
+        id="menu_ir_action_access"
+        parent="base.menu_security"
+        name="Actions Access Rules"
+        sequence="16"/>
 
-    </data>
 </odoo>

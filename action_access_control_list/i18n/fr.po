@@ -18,9 +18,9 @@ msgstr ""
 "Language: fr\n"
 
 #. module: action_access_control_list
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_groups_id
-msgid "Access group"
-msgstr "Groupe d'accès"
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_group_id
+msgid "Group"
+msgstr "Groupe"
 
 #. module: action_access_control_list
 #: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_form
@@ -35,13 +35,13 @@ msgstr "Accès d'action"
 
 #. module: action_access_control_list
 #: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_form
-msgid "Action access"
+msgid "Action Access"
 msgstr "Accès d'action"
 
 #. module: action_access_control_list
 #: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_action_id
-msgid "Action id"
-msgstr "ID d'action"
+msgid "Action"
+msgstr "Action"
 
 #. module: action_access_control_list
 #: model:ir.ui.menu,name:action_access_control_list.menu_ir_action_access
@@ -49,8 +49,8 @@ msgid "Actions access rules"
 msgstr "Règles d'accès aux actions"
 
 #. module: action_access_control_list
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_is_active
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_is_active
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_active
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_active
 msgid "Active"
 msgstr "Actif"
 
@@ -133,13 +133,13 @@ msgstr "Action protégée"
 
 #. module: action_access_control_list
 #: model:ir.ui.menu,name:action_access_control_list.menu_ir_protected_action
-msgid "Protected actions"
+msgid "Protected Actions"
 msgstr "Actions protégée"
 
 #. module: action_access_control_list
 #: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_action_technical_name
 #: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_technical_name
-msgid "Technical name"
+msgid "Technical Name"
 msgstr "Nom technique"
 
 #. module: action_access_control_list

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# © 2011 Smile
 # © 2017 Savoir-faire Linux
 # License GPL-3.0 or later (http://www.gnu.org/licenses/gpl).
 
@@ -11,7 +10,10 @@
     "website": 'https://www.savoirfairelinux.com',
     "license": 'GPL-3',
     "category": "Security",
-    "depends": ['account'],
+    "depends": [
+        'action_access_control_list',
+        'account',
+    ],
     "installable": True,
-    "active": False,
+    "auto_install": True,
 }

@@ -2,4 +2,4 @@
 # © 2017 Savoir-faire Linux
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-import test_action_access_control_list
+from . import test_invoice
