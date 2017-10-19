@@ -6,24 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-06 15:00-0400\n"
-"PO-Revision-Date: 2017-10-06 15:05-0400\n"
+"POT-Creation-Date: 2017-10-21 06:31-0400\n"
+"PO-Revision-Date: 2017-10-21 06:32-0400\n"
+"Last-Translator: istvan Szalai <istvan.szalai@savoirfairelinux.com>\n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: istvan Szalai <istvan.szalai@savoirfairelinux.com>\n"
-"Language: fr\n"
 
 #. module: action_access_control_list
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_group_id
-msgid "Group"
-msgstr "Groupe"
-
-#. module: action_access_control_list
-#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_form
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_action_id
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected_action_id
 msgid "Action"
 msgstr "Action"
 
@@ -31,123 +27,267 @@ msgstr "Action"
 #: model:ir.actions.act_window,name:action_access_control_list.ir_action_access_action
 #: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_list
 msgid "Action Access"
-msgstr "Accès d'action"
+msgstr "Accès sur les actions"
 
 #. module: action_access_control_list
-#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_form
-msgid "Action Access"
-msgstr "Accès d'action"
+#: model:ir.actions.act_window,name:action_access_control_list.ir_action_access_filter_action
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_filter_form
+msgid "Action Access Filter"
+msgstr "Filtre d'accès sur les actions"
 
 #. module: action_access_control_list
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_action_id
-msgid "Action"
-msgstr "Action"
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_filter_list
+msgid "Action Access Filters"
+msgstr "Filtres d'accès sur les actions"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_action_technical_name
+msgid "Action Technical Name"
+msgstr "Nom technique de l'action"
+
+#. module: action_access_control_list
+#: model:ir.ui.menu,name:action_access_control_list.menu_ir_action_access_filter
+msgid "Actions Access Filters"
+msgstr "Filtres d'accès sur les actions"
 
 #. module: action_access_control_list
 #: model:ir.ui.menu,name:action_access_control_list.menu_ir_action_access
-msgid "Actions access rules"
-msgstr "Règles d'accès aux actions"
+msgid "Actions Access Rules"
+msgstr "Règles d'accès sur les actions"
 
 #. module: action_access_control_list
 #: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_active
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_active
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_filter_active
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected_active
 msgid "Active"
 msgstr "Actif"
 
 #. module: action_access_control_list
+#: model:ir.model.fields,help:action_access_control_list.field_ir_action_access_filter_different_domain
+msgid ""
+"By default, the same domain will be used by both the client and the server "
+"side. If checked, a different domain will be used on the client side."
+msgstr ""
+"Par défaut, le même domaine sera utilisé par les côtés client et serveur. Si "
+"coché, un domaine différent sera utilisé du côté client."
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_filter_client_domain
+msgid "Client Side Domain"
+msgstr "Domaine du côté client"
+
+#. module: action_access_control_list
 #: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_create_uid
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_create_uid
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_filter_create_uid
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected_create_uid
 msgid "Created by"
 msgstr "Créé par"
 
 #. module: action_access_control_list
 #: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_create_date
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_create_date
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_filter_create_date
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected_create_date
 msgid "Created on"
 msgstr "Créé le"
 
 #. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_filter_different_domain
+msgid "Different Client/Server Side Domain"
+msgstr "Différent domain pour client et serveur"
+
+#. module: action_access_control_list
 #: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_display_name
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_display_name
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_filter_display_name
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected_display_name
 msgid "Display Name"
 msgstr "Nom d'affichage"
 
 #. module: action_access_control_list
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_domain
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_filter_domain
 msgid "Domain"
 msgstr "Domain"
 
 #. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_filter_ids
+msgid "Domain Filters"
+msgstr "Filtres de domaine"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected_error_message
+msgid "Error message"
+msgstr "Message d'erreur"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_group_id
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_search
+msgid "Group"
+msgstr "Groupe"
+
+#. module: action_access_control_list
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_filter_search
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_search
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_protected_search
+msgid "Group By"
+msgstr "Grouper par"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_filter_id
 #: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_id
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_id
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected_id
 msgid "ID"
 msgstr "ID"
 
 #. module: action_access_control_list
 #: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access___last_update
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action___last_update
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_filter___last_update
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected___last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
 #. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_filter_write_uid
 #: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_write_uid
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_write_uid
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected_write_uid
 msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
 
 #. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_filter_write_date
 #: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_write_date
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_write_date
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected_write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: action_access_control_list
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_model_technical_name
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_model_technical_name
-#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_form
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_filter_model_id
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_model_id
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected_model_id
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_filter_search
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_search
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_protected_search
 msgid "Model"
 msgstr "Modèle"
 
 #. module: action_access_control_list
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_model_id
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_model_id
-msgid "Model id"
-msgstr "ID du modèle"
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_model_technical_name
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected_model_technical_name
+msgid "Model Technical Name"
+msgstr "Nom technique du modèle"
 
 #. module: action_access_control_list
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_name
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_filter_name
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected_name
 msgid "Name"
 msgstr "Nom"
 
 #. module: action_access_control_list
 #: model:ir.model.fields,help:action_access_control_list.field_ir_action_access_action_technical_name
-#: model:ir.model.fields,help:action_access_control_list.field_ir_protected_action_technical_name
-msgid "Name of the python method corresponding to the action"
-msgstr "Nom de la méthode python correspondant à l'action"
+#: model:ir.model.fields,help:action_access_control_list.field_ir_action_protected_technical_name
+msgid "Name of the python method related to the action."
+msgstr "Nom de la méthode python correspondant à l'action."
 
 #. module: action_access_control_list
-#: model:ir.actions.act_window,name:action_access_control_list.ir_protected_action_action
-#: model:ir.ui.view,arch_db:action_access_control_list.ir_protected_action_list
+#: model:ir.actions.act_window,name:action_access_control_list.ir_action_protected_action
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_protected_form
 msgid "Protected Action"
 msgstr "Action protégée"
 
 #. module: action_access_control_list
-#: model:ir.ui.menu,name:action_access_control_list.menu_ir_protected_action
+#: model:ir.ui.menu,name:action_access_control_list.menu_ir_action_protected
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_protected_list
 msgid "Protected Actions"
-msgstr "Actions protégée"
+msgstr "Actions protégées"
 
 #. module: action_access_control_list
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_access_action_technical_name
-#: model:ir.model.fields,field_description:action_access_control_list.field_ir_protected_action_technical_name
+#: selection:ir.action.protected,type:0
+msgid "Python Method"
+msgstr "Méthode python"
+
+#. module: action_access_control_list
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_search
+msgid "Search Action Access"
+msgstr "Rechercher des accès sur les actions"
+
+#. module: action_access_control_list
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_access_filter_search
+msgid "Search Action Filters"
+msgstr "Rechercher des filtres d'action"
+
+#. module: action_access_control_list
+#: model:ir.ui.view,arch_db:action_access_control_list.ir_action_protected_search
+msgid "Search Protected Actions"
+msgstr "Rechercher des actions protégées"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected_technical_name
 msgid "Technical Name"
 msgstr "Nom technique"
 
 #. module: action_access_control_list
+#: model:ir.model.fields,help:action_access_control_list.field_ir_action_protected_action_id
+msgid "The XML action related to the secured action."
+msgstr "L'action XML associée à l'action sécurisée"
+
+#. module: action_access_control_list
+#: model:ir.model.fields,field_description:action_access_control_list.field_ir_action_protected_type
+msgid "Type"
+msgstr "Tyoe"
+
+#. module: action_access_control_list
+#: model:ir.model,name:action_access_control_list.model_res_users
+msgid "Users"
+msgstr "Utilisateurs"
+
+#. module: action_access_control_list
+#: selection:ir.action.protected,type:0
+msgid "XML Action"
+msgstr "Objet de l'action"
+
+#. module: action_access_control_list
+#: code:addons/action_access_control_list/models/ir_action_protected.py:84
+#, python-format
+msgid ""
+"You are not allowed to trigger the action %(action)s on the records of model "
+"%(model)s with ids %(ids)s."
+msgstr ""
+"Vous n'êtes pas autorisé à déclencher l'action %(action)s sur les "
+"enregistrements du modèle %(model)s avec les identifiants %(ids)s."
+
+#. module: action_access_control_list
+#: model:ir.model,name:action_access_control_list.model_ir_model_access
+msgid "ir.model.access"
+msgstr ""
+
+#. module: action_access_control_list
+#: model:ir.model,name:action_access_control_list.model_ir_rule
+msgid "ir.rule"
+msgstr ""
+
+#. module: action_access_control_list
 #: model:ir.model,name:action_access_control_list.model_ir_action_access
-msgid "ir.action.access"
-msgstr "ir.action.access"
+msgid "odoo.addons.action_access_control_list.models.ir_action_access"
+msgstr ""
+
+#. module: action_access_control_list
+#: model:ir.model,name:action_access_control_list.model_ir_action_access_filter
+msgid "odoo.addons.action_access_control_list.models.ir_action_access_filter"
+msgstr ""
+
+#. module: action_access_control_list
+#: model:ir.model,name:action_access_control_list.model_ir_action_protected
+msgid "odoo.addons.action_access_control_list.models.ir_action_protected"
+msgstr ""
 
 #. module: action_access_control_list
 #: model:ir.model,name:action_access_control_list.model_ir_protected_action
-msgid "ir.protected.action"
-msgstr "ir.protected.action"
+msgid "odoo.addons.action_access_control_list.models.ir_protected_action"
+msgstr ""
+
+#~ msgid "Actions access rules"
+#~ msgstr "Règles d'accès aux actions"
+
+#~ msgid "ir.action.access"
+#~ msgstr "ir.action.access"
+
+#~ msgid "ir.action.protected"
+#~ msgstr "ir.action.protected"

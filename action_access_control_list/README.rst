@@ -1,7 +1,6 @@
 ==========================
 Action Access Control List
 ==========================
-
 In Odoo, the way permissions to trigger an action are evaluated causes a load of problems.
 
 If the user does not have access to modify and read all objects manipulated by the transaction, it will raise an incomprehensible error message to the user.

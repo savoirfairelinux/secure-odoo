@@ -8,12 +8,26 @@
             <tree string="Action Access" editable="top">
                 <field name="group_id"/>
                 <field name="model_id"/>
-                <field name="model_technical_name"/>
                 <field name="action_id"/>
-                <field name="action_technical_name"/>
-                <field name="domain"/>
+                <field name="filter_ids" widget="many2many_tags" domain="[('model_id', '=', model_id)]"/>
                 <field name="active"/>
             </tree>
+        </field>
+    </record>
+
+    <record id="ir_action_access_search" model="ir.ui.view">
+        <field name="name">ir.action.access.search</field>
+        <field name="model">ir.action.access</field>
+        <field name="arch" type="xml">
+            <search string="Search Action Access">
+                <field name="action_id"/>
+                <field name="model_id"/>
+                <field name="group_id"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_model_id" string="Model" domain="[]" context="{'group_by': 'model_id'}"/>
+                    <filter name="group_group_id" string="Group" domain="[]" context="{'group_by': 'group_id'}"/>
+                </group>
+            </search>
         </field>
     </record>
 
@@ -24,6 +38,7 @@
         <field name="view_mode">tree</field>
         <field name="view_type">form</field>
         <field name="view_id" ref="ir_action_access_list"/>
+        <field name="search_view_id" ref="ir_action_access_search"/>
     </record>
 
     <act_window id="ir_action_access_action" name="Action Access" res_model="ir.action.access"/>

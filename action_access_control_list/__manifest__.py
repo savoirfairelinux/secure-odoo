@@ -14,7 +14,8 @@
     'data': [
         'security/ir.model.access.csv',
         'views/ir_action_access.xml',
-        'views/ir_protected_action.xml',
+        'views/ir_action_access_filter.xml',
+        'views/ir_action_protected.xml',
         'views/menu.xml',
     ],
     'application': False,

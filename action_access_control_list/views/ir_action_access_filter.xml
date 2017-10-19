@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ir_action_access_filter_form" model="ir.ui.view">
+        <field name="name">ir.action.access.filter.tree</field>
+        <field name="model">ir.action.access.filter</field>
+        <field name="arch" type="xml">
+            <form string="Action Access Filter">
+                <sheet>
+                    <h1><field name="name"/></h1>
+                    <group>
+                        <field name="model_id"/>
+                        <field name="domain"/>
+                        <field name="different_domain"/>
+                        <field name="client_domain" attrs="{
+                            'invisible': [('different_domain', '=', False)],
+                            'required': [('different_domain', '=', True)],
+                        }"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ir_action_access_filter_list" model="ir.ui.view">
+        <field name="name">ir.action.access.filter.tree</field>
+        <field name="model">ir.action.access.filter</field>
+        <field name="arch" type="xml">
+            <tree string="Action Access Filters">
+                <field name="name"/>
+                <field name="model_id"/>
+                <field name="domain"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ir_action_access_filter_search" model="ir.ui.view">
+        <field name="name">ir.action.access.filter.search</field>
+        <field name="model">ir.action.access.filter</field>
+        <field name="arch" type="xml">
+            <search string="Search Action Filters">
+                <field name="name"/>
+                <field name="model_id"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_model_id" string="Model" domain="[]" context="{'group_by': 'model_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="ir_action_access_filter_action" model="ir.actions.act_window">
+        <field name="name">Action Access Filter</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ir.action.access.filter</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="search_view_id" ref="ir_action_access_filter_search"/>
+    </record>
+
+</odoo>
