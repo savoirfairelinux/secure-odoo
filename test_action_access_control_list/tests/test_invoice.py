@@ -14,6 +14,7 @@ class TestInvoice(SavepointCase):
     def setUpClass(cls):
         super(TestInvoice, cls).setUpClass()
 
+        cls.company = cls.env.ref('base.main_company')
         cls.test_user = cls.env.ref('base.user_demo')
 
         cls.env['ir.protected.action'].search([]).unlink()
@@ -24,17 +25,34 @@ class TestInvoice(SavepointCase):
             'model_id': cls.env['account.invoice'],
         })
 
-        cls.journal = cls.env['account.journal'].search(
-            [('type', '=', 'sale')], limit=1)
-        cls.account = cls.env['account.account'].search(
-            [('user_type_id.type', '=', 'receivable')], limit=1)
-        cls.account_income = cls.env['account.account'].search(
-            [('user_type_id.type', '=', 'other')], limit=1)
+        cls.journal = cls.env['account.journal'].create({
+            'name': 'Journal 1',
+            'code': 'TEST1',
+            'type': 'sale',
+            'company_id': cls.company.id,
+        })
+
+        cls.receivable = cls.env['account.account'].create({
+            'name': 'Receivable',
+            'code': '1111111',
+            'user_type_id': cls.env.ref(
+                'account.data_account_type_receivable').id,
+            'company_id': cls.company.id,
+            'reconcile': True,
+        })
+
+        cls.expense = cls.env['account.account'].create({
+            'name': 'Expense',
+            'code': '6111111',
+            'user_type_id': cls.env.ref(
+                'account.data_account_type_expenses').id,
+            'company_id': cls.company.id,
+        })
 
         cls.partner = cls.env['res.partner'].create({'name': 'Customer'})
 
         cls.out_invoice = cls.env['account.invoice'].create({
-            'account_id': cls.account.id,
+            'account_id': cls.receivable.id,
             'partner_id': cls.partner.id,
             'journal_id': cls.journal.id,
             'type': 'out_invoice',
@@ -43,7 +61,7 @@ class TestInvoice(SavepointCase):
         cls.account_invoice_line_1 = cls.env['account.invoice.line'].create({
             'invoice_id': cls.out_invoice.id,
             'name': 'Line 1',
-            'account_id': cls.account_income.id,
+            'account_id': cls.expense.id,
             'price_unit': 20,
         })
 
@@ -105,7 +123,7 @@ class TestInvoice(SavepointCase):
     def _add_read_access(self):
         self.env['ir.model.access'].create({
             'name': 'Invoice Access',
-            'groups_id': self.test_user.groups_id[0].id,
+            'group_id': self.test_user.groups_id[0].id,
             'model_id': self.env.ref('account.model_account_invoice').id,
             'perm_read': 1,
             'perm_write': 0,
