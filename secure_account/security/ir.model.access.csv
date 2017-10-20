@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_analytic_line_manager,access_analytic_line_manager,model_account_analytic_line,group_analytic_line_manager,1,1,1,1
