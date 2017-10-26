@@ -112,8 +112,8 @@ class TestInvoice(SavepointCase):
             self.action.check_access(self.test_user, [self.out_invoice.id])
 
     def test_14_check_access_both_domain(self):
-        self._add_action_access("[('type', '=', 'out_invoice')]")
         self._add_action_access("[('type', '=', 'in_invoice')]")
+        self._add_action_access("[('type', '=', 'out_invoice')]")
         self.action.check_access(self.test_user, [self.out_invoice.id])
 
     def test_15_check_access_dynamic_domain(self):

@@ -10,7 +10,7 @@
     'website': 'http://www.savoirfairelinux.com',
     'license': 'LGPL-3',
     'category': 'Security',
-    'depends': ['base'],
+    'depends': ['base', 'web'],
     'data': [
         'security/ir.model.access.csv',
         'views/ir_action_access.xml',

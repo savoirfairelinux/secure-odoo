@@ -59,7 +59,7 @@ class IrProtectedAction(models.Model):
                 return True
 
             if not ids:
-                return False
+                continue
 
             domain = [
                 normalize_domain(safe_eval(f.get_server_domain(user)))
@@ -74,7 +74,7 @@ class IrProtectedAction(models.Model):
                 .search(domain)
 
             if set(ids).difference(records.ids):
-                return False
+                continue
             return True
         return False
 
