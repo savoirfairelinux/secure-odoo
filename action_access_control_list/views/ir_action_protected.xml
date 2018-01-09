@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ir_action_protected_form" model="ir.ui.view">
+        <field name="name">ir.action.protected.tree</field>
+        <field name="model">ir.action.protected</field>
+        <field name="arch" type="xml">
+            <form string="Protected Action">
+                <sheet>
+                    <h1><field name="name"/></h1>
+                    <group>
+                        <field name="type"/>
+                        <field name="technical_name" attrs="{
+                            'invisible': [('type', '!=', 'python')],
+                            'required': [('type', '=', 'python')],
+                        }"/>
+                        <field name="action_id" attrs="{
+                            'invisible': [('type', '!=', 'action')],
+                            'required': [('type', '=', 'action')],
+                        }"/>
+                        <field name="model_id"/>
+                        <field name="model_technical_name"/>
+                        <field name="active"/>
+                        <field name="error_message"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ir_action_protected_list" model="ir.ui.view">
+        <field name="name">ir.action.protected.tree</field>
+        <field name="model">ir.action.protected</field>
+        <field name="arch" type="xml">
+            <tree string="Protected Actions">
+                <field name="name"/>
+                <field name="technical_name"/>
+                <field name="action_id"/>
+                <field name="model_id"/>
+                <field name="model_technical_name"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ir_action_protected_search" model="ir.ui.view">
+        <field name="name">ir.action.protected.search</field>
+        <field name="model">ir.action.protected</field>
+        <field name="arch" type="xml">
+            <search string="Search Protected Actions">
+                <field name="name"/>
+                <field name="model_id"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_model_id" string="Model" domain="[]" context="{'group_by': 'model_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="ir_action_protected_action" model="ir.actions.act_window">
+        <field name="name">Protected Actions</field>
+        <field name="type">ir.action.protected.act_window</field>
+        <field name="res_model">ir.action.protected</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="search_view_id" ref="ir_action_protected_search"/>
+    </record>
+
+    <act_window id="ir_action_protected_action" name="Protected Action" res_model="ir.action.protected"/>
+
+    <template id="assets_backend" name="action_access_control_list_assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/action_access_control_list/static/src/js/widget_button.js"></script>
+        </xpath>
+    </template>
+
+</odoo>

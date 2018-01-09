@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_ir_action_access_user,access_ir_action_access_user,model_ir_action_access,base.group_erp_manager,1,1,1,1
-access_ir_protected_action_user,access_ir_protected_action_user,model_ir_protected_action,base.group_erp_manager,1,1,1,1
+access_ir_action_access,access_ir_action_access,model_ir_action_access,base.group_erp_manager,1,1,1,1
+access_ir_action_access_filter,access_ir_action_access_filter,model_ir_action_access_filter,base.group_erp_manager,1,1,1,1
+access_ir_action_protected,access_ir_action_protected,model_ir_action_protected,base.group_erp_manager,1,1,1,1
