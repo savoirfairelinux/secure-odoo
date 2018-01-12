@@ -16,7 +16,7 @@ class Base(models.AbstractModel):
 
         return super(Base, self).check_access_rule(operation)
 
-    @api.multi
+    @api.model
     def check_access_rights(self, operation, raise_exception=True):
         if self._check_bypass_access():
             return True
